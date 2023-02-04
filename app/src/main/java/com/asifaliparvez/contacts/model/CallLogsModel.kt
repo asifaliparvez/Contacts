@@ -1,10 +1,11 @@
 package com.asifaliparvez.contacts.model
 
-import kotlin.time.Duration
-
 data class CallLogsModel(
+    val id:String,
+    val name:String,
     val number:String,
     val duration: String,
-    val date:String
-) {
-}
+    val date:String,
+    val type:String,
+
+)

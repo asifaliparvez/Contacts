@@ -1,14 +1,22 @@
-package com.asifaliparvez.contacts.managers
+package com.asifaliparvez.contacts.repo
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.provider.CallLog
+import android.provider.CallLog.Calls
 import android.provider.ContactsContract
+import android.telecom.Call
+import android.util.Log
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.asifaliparvez.contacts.model.CallLogsModel
 import com.asifaliparvez.contacts.model.ContactsModel
+import java.util.*
+import kotlin.collections.ArrayList
 
-class ContactsManager(val context: Context) {
+class ContactRepository(val context: Context) {
 
 
     // Get All Contacts
@@ -81,8 +89,78 @@ class ContactsManager(val context: Context) {
 
 
     }
-    //TODO : Add Call Features
-    private fun getCallLogs(){
+
+     @RequiresApi(Build.VERSION_CODES.O)
+     fun getCallLogs():ArrayList<CallLogsModel>{
+
+        val array = arrayListOf<CallLogsModel>()
+
+        val cursor = context.contentResolver.query(CallLog.Calls.CONTENT_URI, null, null, null, "date DESC")
+        Calls.DEFAULT_SORT_ORDER
+        cursor?.apply {
+            val nameIndex = getColumnIndex(Calls.CACHED_NAME)
+            val idIndex = getColumnIndex(Calls._ID)
+            val durIndex = getColumnIndex(Calls.DURATION)
+            val numIndex = getColumnIndex(Calls.NUMBER)
+            val dateIndex = getColumnIndex(Calls.DATE)
+            val typeIndex = getColumnIndex(Calls.TYPE)
+            val savedIndex = getColumnIndex(Calls.IS_READ)
+
+
+            while (moveToNext()){
+                val id = getString(idIndex)
+                val name = getString(nameIndex)
+                val duration = getString(durIndex)
+                val number = getString(numIndex)
+                val date = getString(dateIndex)
+                val type = getString(typeIndex)
+
+
+                array.add(CallLogsModel(id, name, number, duration, date, type))
+            }
+            cursor.close()
+        }
+        return array
+
+    }
+
+    fun getCallLogsOfSpecificNumber(number:String):ArrayList<CallLogsModel>{
+        val array = arrayListOf<CallLogsModel>()
+        val columns: Array<String> = arrayOf(
+            Calls.NUMBER,
+            Calls._ID,
+            Calls.CACHED_NAME,
+            Calls.CACHED_PHOTO_URI,
+            Calls.TYPE,
+            Calls.DURATION,
+            Calls.IS_READ
+        )
+        val cursor = context.contentResolver.query(Calls.CONTENT_URI, null, "${Calls.NUMBER} LIKE $number", null, "date DESC")
+        cursor?.apply {
+            val nameIndex = getColumnIndex(Calls.CACHED_NAME)
+            val idIndex = getColumnIndex(Calls._ID)
+            val durIndex = getColumnIndex(Calls.DURATION)
+            val numIndex = getColumnIndex(Calls.NUMBER)
+        //    val dateIndex = getColumnIndex(Calls.DATE)
+            val typeIndex = getColumnIndex(Calls.TYPE)
+            val savedIndex = getColumnIndex(Calls.IS_READ)
+
+
+            while (moveToNext()){
+                val id = getString(idIndex)
+                val name = getString(nameIndex)
+                val duration = getString(durIndex)
+                val number = getString(numIndex)
+//                val date = getString(dateIndex)
+                val type = getString(typeIndex)
+
+
+                array.add(CallLogsModel(id, name, number, duration, "date", type))
+            }
+            cursor.close()
+        }
+        return array
+
 
     }
 

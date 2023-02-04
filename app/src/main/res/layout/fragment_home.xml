@@ -5,52 +5,90 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    tools:context=".fragments.HomeFragment">
+    tools:context=".fragments.ContactsFragment">
 
-    <androidx.cardview.widget.CardView
+    <EditText
         android:layout_width="match_parent"
-        android:id="@+id/cardView_Toolbar"
-        app:cardElevation="10dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/editText"
+        android:inputType="text"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+        android:hint="Search Contact"
+        android:layout_marginHorizontal="10dp"
+        android:textSize="15sp"
+        android:lines="1"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:background="@drawable/search_edittext_background"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/relativeLayout"
+        android:layout_below="@+id/editText"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImageView"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/white"
+            android:layout_marginBottom="5dp"
+            android:padding="5dp"
+            android:tint="@color/primary_light_color"
+            android:src="@drawable/baseline_create_new_contact_24" />
+
+        <TextView
+            android:id="@+id/textView_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:subtitleTextColor="@color/black"
-            app:title="Contacts"
-            app:titleTextColor="@color/black"/>
+            android:textStyle="bold"
+            android:layout_marginVertical="20dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_toEndOf="@+id/profileImageView"
+            android:text="Create New Contact"
+            android:textColor="@color/primary_light_color"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleView"
+        android:layout_marginHorizontal="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/cardView_Toolbar" />
 
-
+        android:layout_below="@+id/relativeLayout" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingButton"
+        android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+
         android:layout_alignParentBottom="true"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/primary_color"
+        android:tint="@color/white"
         android:layout_marginEnd="16dp"
+        app:backgroundTint="@color/primary_color"
         android:layout_marginBottom="16dp"
-        android:contentDescription="To The Top"
-        android:elevation="0dp"
-        android:minHeight="48dp"
-        android:scaleType="center"
-        android:src="@drawable/ic_action_add"
-        app:backgroundTint="@color/white"
-        app:maxImageSize="30dp"
-        app:tint="#00BAF9" />
+        android:clickable="true"
+        app:tint="@color/white"
+        android:src="@drawable/baseline_dialer_24" />
+
 
 
 </RelativeLayout>

@@ -36,19 +36,30 @@ class ContactsAdapter(var arrayList:ArrayList<ContactsModel>, var context:Contex
         val item = arrayList.elementAt(position)
         holder.textViewName.text = item.name
 
+
         if(item.photo != "null"){
             holder.imageView.setImageURI(Uri.parse(item.photo))
-        }else{
+
+
+        }
+        else{
             holder.imageView.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.user))
         }
+
         holder.itemView.setOnClickListener {
             val bundle = bundleOf(
                 "name" to holder.textViewName.text.toString(),
-                "lookUpKey" to item.lookUpKey
+                "lookUpKey" to item.lookUpKey,
+                "id" to item.id,
             )
             it.findNavController().navigate(R.id.action_homeFragment_to_contactDetail, bundle)
         }
 
+    }
+
+    fun filterList(arrayList: ArrayList<ContactsModel>){
+        this.arrayList = arrayList
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {

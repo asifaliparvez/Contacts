@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/profileTextView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:background="@drawable/profile_background_circle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/number_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="78093444108"
+        android:textColor="#000"
+        android:layout_marginStart="10dp"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/profileTextView"
+        app:layout_constraintTop_toTopOf="@+id/profileTextView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12 Jan/ 11"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/date_TextView"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/number_TextView" />
+
+    <ImageView
+        android:id="@+id/callType_imageView"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/baseline_call_missed_24"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="@+id/number_TextView"
+        app:layout_constraintTop_toBottomOf="@+id/number_TextView" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/dot"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/callType_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/number_TextView" />
+
+    <ImageView
+        android:id="@+id/callImageBtn"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="13dp"
+        android:src="@drawable/ic_action_call"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/secondary" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
